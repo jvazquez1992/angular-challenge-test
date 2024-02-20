@@ -1,0 +1,55 @@
+<div style="text-align: center; margin: 5%;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Banco_Pichincha_nuevo.png/800px-Banco_Pichincha_nuevo.png"
+    style="width: 25%; margin: 5%;"/>
+</div>
+<div *ngIf="mostrarListado; then templateList"></div>
+<div *ngIf="!mostrarListado; then templateCrud"></div>
+
+<div class="floating-card" *ngIf="showCard" [ngClass]="{'info': messageType === 'info', 'error': messageType === 'error'}">
+  <div class="message">{{ message }}</div>
+</div>
+
+<ng-template #templateList>
+    <div style="margin: 5%; padding-bottom: 1px;" class="table-container">
+        <input style="text-align:left; float: left;" type="text" placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="onSearchChange($any($event))">
+        <button style="text-align:left; float: right;" class="square-button yellow-button" (click)="changeView()">Agregar</button>
+    </div>
+    <div style="text-align:center; margin: 5%;" class="table-container">
+        <table>
+            <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Nombre del producto</th>
+                <th>Descripción</th>
+                <th>Fecha de liberación</th>
+                <th>Fecha de reestructuración</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of filteredData">
+                <td>{{ item.logo }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.date_release | date: "shortDate" }}</td>
+                <td>{{ item.date_revision | date: "shortDate" }}</td>
+                <td>
+                  <button class="square-button yellow-button" (click)="editProduct(item)">Editar</button>
+                  <button class="square-button yellow-button" (click)="confirmDelete(item)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p *ngIf="!filteredData || filteredData.length === 0">No hay datos disponibles.</p>
+          <p class="footer-message-left">{{filteredData.length}} Resultados</p>
+          <select class="footer-message-right" [(ngModel)]="selectedNumber" disabled="{{filteredData.length<=0}}">
+            <option *ngFor="let number of numbers" [value]="number">{{ number }}</option>
+          </select>
+    </div>
+</ng-template>
+<ng-template #templateCrud>
+  <div style="text-align:left; margin-top: 5%; margin-left: 10%; margin-right: 10%;" class="table-container">
+    <app-form-financial-product [financialProduct]="selectedFinancialProduct"></app-form-financial-product>
+    <button class="square-button gray-button" (click)="changeView()">Regresar</button>
+  </div>
+</ng-template>

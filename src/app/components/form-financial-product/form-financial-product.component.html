@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="title">
+        <h1>Formulario de Datos</h1>
+        <hr class="divider">
+    </div>
+
+    <div class="floating-card" *ngIf="showCard" [ngClass]="{'info': messageType === 'info', 'error': messageType === 'error'}">
+        <div class="message">{{ message }}</div>
+      </div>
+
+    <form [formGroup]="formulario">
+        <div class="columns-container">
+            <div class="column">
+                <div class="form-group" [ngClass]="{'invalid': !campoEsValido('id')}">
+                    <label for="id"><b>ID</b></label>
+                    <br />
+                    <input type="text" class="form-control" id="id" formControlName="id">
+                    <div *ngIf="formulario.get('id')!.invalid && (formulario.get('id')!.dirty || formulario.get('id')!.touched)"
+                        class="error-message">
+                        <div *ngIf="formulario.get('id')!.hasError('required')">El ID es obligatorio</div>
+                        <div *ngIf="formulario.get('id')!.hasError('minlength')">El ID debe tener al menos 3 caracteres
+                        </div>
+                        <div *ngIf="formulario.get('id')!.hasError('maxlength')">El ID no puede tener más de 10
+                            caracteres</div>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'invalid': !campoEsValido('description')}">
+                    <label for="description"><b>Descripción</b></label>
+                    <br />
+                    <input type="text" class="form-control" id="description" formControlName="description">
+                    <div *ngIf="formulario.get('description')!.invalid && (formulario.get('description')!.dirty || formulario.get('description')!.touched)"
+                        class="error-message">
+                        <div *ngIf="formulario.get('description')!.hasError('required')">La descripción es obligatoria
+                        </div>
+                        <div *ngIf="formulario.get('description')!.hasError('minlength')">La descripción debe de tener
+                            al menos 10 caracteres</div>
+                        <div *ngIf="formulario.get('description')!.hasError('maxlength')">El descripción no puede tener
+                            más de 200 caracteres</div>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'invalid': !campoEsValido('date_release')}">
+                    <label for="date_release"><b>Fecha de liberación</b></label>
+                    <br />
+                    <input type="date" class="form-control" id="date_release" formControlName="date_release">
+                    <div *ngIf="formulario.get('date_release')!.invalid && (formulario.get('date_release')!.dirty || formulario.get('date_release')!.touched)"
+                        class="error-message">
+                        <div *ngIf="formulario.get('date_release')!.hasError('required')">La fecha de liberación es obligatoria</div>
+                        <div *ngIf="formulario.get('date_release')!.hasError('invalidDate')">La fecha de liberación debe de ser mayor o igual a la fecha actual</div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group" [ngClass]="{'invalid': !campoEsValido('name')}">
+                    <label for="name"><b>Nombre</b></label>
+                    <br />
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                    <div *ngIf="formulario.get('name')!.invalid && (formulario.get('name')!.dirty || formulario.get('name')!.touched)"
+                        class="error-message">
+                        <div *ngIf="formulario.get('name')!.hasError('required')">El nombre es obligatorio
+                        </div>
+                        <div *ngIf="formulario.get('name')!.hasError('minlength')">El nombre debe de tener
+                            al menos 5 caracteres</div>
+                        <div *ngIf="formulario.get('name')!.hasError('maxlength')">El nombre no puede tener
+                            más de 100 caracteres</div>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'invalid': !campoEsValido('logo')}">
+                    <label for="logo"><b>Logo</b></label>
+                    <br />
+                    <input type="text" class="form-control" id="logo" formControlName="logo">
+                    <div *ngIf="formulario.get('logo')!.invalid && (formulario.get('logo')!.dirty || formulario.get('logo')!.touched)"
+                        class="error-message">
+                        <div *ngIf="formulario.get('logo')!.hasError('required')">El logo es obligatorio</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" [ngClass]="{'invalid': !campoEsValido('date_revision')}">
+                        <label for="date_revision"><b>Fecha de reestructuración</b></label>
+                        <br />
+                        <input type="date" class="form-control" id="date_revision" formControlName="date_revision">
+                        <div *ngIf="formulario.get('date_revision')!.invalid && (formulario.get('date_revision')!.dirty || formulario.get('date_revision')!.touched)"
+                        class="error-message">
+                        <div *ngIf="formulario.get('date_revision')!.hasError('required')">La fecha de reestructuración es
+                            obligatoria</div>
+                        <div *ngIf="formulario.get('date_revision')!.hasError('invalidDate')">La fecha de reestructuración debe de ser un año mayor a la fecha de liberación</div>
+                    </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="button-container" style="text-align: center;">
+        <button class="square-button gray-button" (click)="initForm()">Reiniciar</button>
+        <button class="square-button yellow-button" type="submit" (click)="save()">Enviar</button>
+    </div>
+</div>

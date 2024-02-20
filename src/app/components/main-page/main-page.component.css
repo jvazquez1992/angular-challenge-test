@@ -1,0 +1,90 @@
+.table-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 15px;
+}
+
+.footer-message-left{
+  float: left;
+}
+
+.footer-message-right{
+  float: right;
+}
+
+input[type="text"] {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 200px;
+}
+
+.square-button {
+  border: none;
+  padding: 20px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 25px; 
+  cursor: pointer;
+}
+
+.yellow-button {
+  background-color: #ffcc00;
+  color: #000000;
+}
+
+.gray-button {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+.square-button:hover {
+  opacity: 0.8;
+}
+
+.floating-card {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 10px 20px;
+  z-index: 9999;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.floating-card.info {
+  background-color: #e6f7ff;
+  border-color: #1890ff;
+}
+
+.floating-card.error {
+  background-color: #fff1f0;
+  border-color: #ff4d4f;
+}
+
+.message {
+  color: #333333;
+  font-size: 16px;
+}
+
+.floating-card.ng-enter, .floating-card.ng-leave {
+  transition: opacity 0.5s;
+}
+
+.floating-card.ng-enter, .floating-card.ng-leave.ng-leave-active {
+  opacity: 0;
+}
